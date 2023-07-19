@@ -98,7 +98,7 @@ public class Main {
                                                                                     System.out.println("a: " + (a + 1) + ", b: " + (b + 1) + ", c: " + (c + 1) + ", d: " + (d + 1) + ", e: " + (e + 1) + ", f: " + (f + 1) + ", g: " + (g + 1) + ", h: " + (h + 1) + ", i: " + (i + 1));
 //                                                                                    System.out.println("card rotation:");
 //                                                                                    System.out.println("j: " + (j + 1) + ", k: " + (k + 1) + ", l: " + (l + 1) + ", m: " + (m + 1) + ", n: " + (n + 1) + ", o: " + (o + 1) + ", p: " + (p + 1) + ", q: " + (q + 1) + ", r: " + (r + 1));
-                                                                                    System.out.println("north number for each card:");
+                                                                                    System.out.println("North number for each card:");
                                                                                     System.out.print("a: "+cards[a][j][0]);
                                                                                     System.out.print(", b: "+cards[b][k][0]);
                                                                                     System.out.print(", c: "+cards[c][l][0]);
