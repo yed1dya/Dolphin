@@ -1,5 +1,17 @@
 public class Main {
     public static void main(String[] args) {
+        /*
+        loops a-i: choose a card for each spot.
+        if card is already selected, continue.
+        loops j-r: choose a rotation for each spot.
+        create variables of the value in the relevant spots.
+        if values don't match, continue.
+        in the innermost loop, final check to make sure values match
+        (probably not necessary but negligible)
+        print card placement (which card is in spot 'a', etc.)
+        and rotation (which number is on top).
+         */
+        int count = 0;
         int[][][] cards = {
                 {   // Card 1 and its rotations
                         {5, 6, 8, 7}, {6, 8, 7, 5}, {7, 5, 6, 8}, {8, 7, 5, 6}
@@ -33,67 +45,86 @@ public class Main {
         long startTime = System.currentTimeMillis();
 
         for (int a = 0; a < 9; a++) {
+            count++;
             for (int b = 0; b < 9; b++) {
-                if (b == a) continue;
+                if (b == a) continue; // can't choose the same card twice
+                count++;
                 for (int c = 0; c < 9; c++) {
                     if (c == a || c == b) continue;
+                    count++;
                     for (int d = 0; d < 9; d++) {
                         if (d == a || d == b || d == c) continue;
+                        count++;
                         for (int e = 0; e < 9; e++) {
                             if (e == a || e == b || e == c || e == d) continue;
+                            count++;
                             for (int f = 0; f < 9; f++) {
                                 if (f == a || f == b || f == c || f == d || f == e) continue;
+                                count++;
                                 for (int g = 0; g < 9; g++) {
                                     if (g == a || g == b || g == c || g == d || g == e || g == f) continue;
+                                    count++;
                                     for (int h = 0; h < 9; h++) {
                                         if (h == a || h == b || h == c || h == d || h == e || h == f || h == g) continue;
+                                        count++;
                                         for (int i = 0; i < 9; i++) {
                                             if (i == a || i == b || i == c || i == d || i == e || i == f || i == g || i == h) continue;
+                                            count++;
                                             for (int j = 0; j < 4; j++) {
-                                                int a1 = cards[a][j][1];
+                                                int a1 = cards[a][j][1]; // the number on right side of top left card
                                                 int a2 = cards[a][j][2];
+                                                count++;
                                                 for (int k = 0; k < 4; k++) {
                                                     int b1 = cards[b][k][1];
                                                     int b2 = cards[b][k][2];
                                                     int b3 = cards[b][k][3];
-                                                    if(a1+b3!=9) continue;
+                                                    if(a1+b3!=9) continue; // if a pair doesn't match, no need to keep checking
+                                                    count++;
                                                     for (int l = 0; l < 4; l++) {
                                                         int c2 = cards[c][l][2];
                                                         int c3 = cards[c][l][3];
                                                         if(b1+c3!=9) continue;
+                                                        count++;
                                                         for (int m = 0; m < 4; m++) {
                                                             int d0 = cards[d][m][0];
                                                             int d1 = cards[d][m][1];
                                                             int d2 = cards[d][m][2];
                                                             if(a2+d0!=9) continue;
+                                                            count++;
                                                             for (int n = 0; n < 4; n++) {
                                                                 int e0 = cards[e][n][0];
                                                                 int e1 = cards[e][n][1];
                                                                 int e2 = cards[e][n][2];
                                                                 int e3 = cards[e][n][3];
                                                                 if(b2+e0!=9 || d1+e3!=9) continue;
+                                                                count++;
                                                                 for (int o = 0; o < 4; o++) {
                                                                     int f0 = cards[f][o][0];
                                                                     int f2 = cards[f][o][2];
                                                                     int f3 = cards[f][o][3];
                                                                     if(c2+f0!=9 || e1+f3!=9) continue;
+                                                                    count++;
                                                                     for (int p = 0; p < 4; p++) {
                                                                         int g0 = cards[g][p][0];
                                                                         int g1 = cards[g][p][1];
                                                                         if(d2+g0!=9) continue;
+                                                                        count++;
                                                                         for (int q = 0; q < 4; q++) {
                                                                             int h0 = cards[h][q][0];
                                                                             int h1 = cards[h][q][1];
                                                                             int h3 = cards[h][q][3];
                                                                             if(e2+h0!=9 || g1+h3!=9) continue;
+                                                                            count++;
                                                                             for (int r = 0; r < 4; r++) {
                                                                                 int i0 = cards[i][r][0];
                                                                                 int i3 = cards[i][r][3];
                                                                                 if(f2+i0!=9 || h1+i3!=9) continue;
+                                                                                count++;
+                                                                                // final check that all pairs match:
                                                                                 if(a1+b3==9 && b1+c3==9 && a2+d0==9 && b2+e0==9 && c2+f0==9 && d1+e3==9 && e1+f3==9 && d2+g0==9 && e2+h0==9 && f2+i0==9 && g1+h3==9 && h1+i3==9){
                                                                                     long endTime = System.currentTimeMillis();
                                                                                     long duration = endTime - startTime;
-                                                                                    System.out.println("Time: " + duration + " milliseconds");
+                                                                                    System.out.println("Time: " + duration + " milliseconds, count: "+count);
                                                                                     System.out.println("card placement:");
                                                                                     System.out.println("a: " + (a + 1) + ", b: " + (b + 1) + ", c: " + (c + 1) + ", d: " + (d + 1) + ", e: " + (e + 1) + ", f: " + (f + 1) + ", g: " + (g + 1) + ", h: " + (h + 1) + ", i: " + (i + 1));
 //                                                                                    System.out.println("card rotation:");
@@ -107,8 +138,7 @@ public class Main {
                                                                                     System.out.print(", f: "+cards[f][o][0]);
                                                                                     System.out.print(", g: "+cards[g][p][0]);
                                                                                     System.out.print(", h: "+cards[h][q][0]);
-                                                                                    System.out.print(", i: "+cards[i][r][0]);
-                                                                                    System.out.println();
+                                                                                    System.out.println(", i: "+cards[i][r][0]);
                                                                                     System.out.println("--------------------------------");
                                                                                 }
                                                                             }
@@ -131,7 +161,7 @@ public class Main {
         }
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
-        System.out.println("Total time: " + duration + " milliseconds");
+        System.out.println("Total time: " + duration + " milliseconds, count: "+count);
         System.out.println("END");
     }
 }
